@@ -8,6 +8,7 @@ public class Luta extends Jogo{
 	public int registraJogada(int score, boolean zerou){
 		int maxscore = getMaxScore();
 		int pontos = maxscore/1000;
+		setJogadas();
 		
 		if(score > maxscore){
 			pontos += score/1000;
@@ -18,8 +19,5 @@ public class Luta extends Jogo{
 		}
 		
 		return pontos;
-		
-		
-		
 	}
 }

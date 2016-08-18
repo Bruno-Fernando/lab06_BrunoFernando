@@ -1,0 +1,13 @@
+
+public class RPG extends Jogo{
+	private final int x2p = 10;
+	
+	public RPG(String nome, double preco, Jogabilidade jogabilidade){
+		super(nome, preco, jogabilidade);
+	}
+	
+	public boolean registraJogada(int score, boolean zerou){
+		
+	}
+
+}

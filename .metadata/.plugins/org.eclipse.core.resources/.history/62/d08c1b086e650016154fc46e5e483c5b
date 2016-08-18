@@ -1,0 +1,68 @@
+import java.util.HashSet;
+
+abstract class Usuario {
+	private String nome;
+	private String login;
+	private HashSet <Jogo> bibliotecaJogos = new HashSet<Jogo>();
+	private double gold = 0;
+	private int x2p;
+	
+	public Usuario (String nome, String login, int x2p){
+		this.nome = nome;
+		this.login = login;
+		this.x2p = x2p;
+		
+	}
+	
+	public void adicionaGold(double gold){
+		this.gold += gold;
+	}
+	
+	//public abstract boolean compraJogo(Jogo jogo);
+	
+	public void registraJogada(String nomeDoJogo, int score,boolean zerou){
+		for (Jogo jogo : bibliotecaJogos) {
+			if(nomeDoJogo.equalsIgnoreCase(jogo.getNome())){
+				setX2p(jogo.registraJogada(score, zerou));
+			}
+		}
+	}
+	
+	public void adicionaGold(double gold){
+		this.gold += gold;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public double getGold() {
+		return gold;
+	}
+
+	public void setGold(double gold) {
+		this.gold = gold;
+	}
+
+	public int getX2p() {
+		return x2p;
+	}
+
+	public void setX2p(int x2p) {
+		this.x2p = x2p;
+	}
+	
+	
+}

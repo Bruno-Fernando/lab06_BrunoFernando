@@ -1,0 +1,31 @@
+import java.util.HashSet;
+
+abstract class Usuario {
+	private String nome;
+	private String login;
+	private HashSet <Jogo> bibliotecaJogos = new HashSet<Jogo>();
+	private double gold = 0;
+	private int x2p;
+	
+	public Usuario (String nome, String login, int x2p){
+		this.nome = nome;
+		this.login = login;
+		this.x2p = x2p;
+		
+	}
+	
+	public void adicionaGold(double gold){
+		this.gold += gold;
+	}
+	
+	public void compraJogo(){
+		
+	}
+	
+	abstract int x2pPorCompra(double preco);
+	
+	public void registraJogada(String nomeDoJogo, int score,boolean zerou){
+		/*x2p += Jogo.registraJogada(score,zerou);*/
+	}
+
+}

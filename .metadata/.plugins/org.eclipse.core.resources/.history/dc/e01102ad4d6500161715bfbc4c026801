@@ -1,0 +1,19 @@
+import java.util.HashSet;
+
+public class Jogo {
+	private String nome;
+	private double preco;
+	private int maxScore;
+	private int jogadas;
+	private int zeradas;
+	HashSet<Jogabilidade> jogabilidade = new HashSet<Jogabilidade>();
+	
+	public Jogo(String nome,double preco, Jogabilidade jogabilidade){
+		this.nome = nome;
+		this.preco = preco;
+		this.maxScore = 0;
+		this.jogadas = 0;
+		this.zeradas = 0;
+	}
+	
+}

@@ -6,7 +6,7 @@ abstract class Jogo {
 	private int maxScore;
 	private int jogadas;
 	private int zeradas;
-	HashSet<Jogabilidade> jogabilidade = new HashSet<Jogabilidade>();
+	private HashSet<Jogabilidade> jogabilidade;
 	
 	public Jogo(String nome,double preco, Jogabilidade jogabilidade){
 		this.nome = nome;
@@ -14,8 +14,11 @@ abstract class Jogo {
 		this.maxScore = 0;
 		this.jogadas = 0;
 		this.zeradas = 0;
+		new HashSet<Jogabilidade>();
 	}
 
+	abstract int registraJogada(int score, boolean zerou);
+	
 	public String getNome() {
 		return nome;
 	}
@@ -44,8 +47,8 @@ abstract class Jogo {
 		return jogadas;
 	}
 
-	public void setJogadas(int jogadas) {
-		this.jogadas = jogadas;
+	public void setJogadas() {
+		this.jogadas += 1;
 	}
 
 	public int getZeradas() {
@@ -54,6 +57,14 @@ abstract class Jogo {
 
 	public void setZeradas() {
 		this.zeradas += 1;
-	}	
+	}
+
+	public HashSet<Jogabilidade> getJogabilidade() {
+		return jogabilidade;
+	}
+
+	public void setJogabilidade(HashSet<Jogabilidade> jogabilidade) {
+		this.jogabilidade = jogabilidade;
+	}
 	
 }

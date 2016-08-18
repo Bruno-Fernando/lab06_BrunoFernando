@@ -1,0 +1,8 @@
+
+public class Plataforma extends Jogo{
+	
+	public Plataforma(String nome, double preco, Jogabilidade jogabilidade){
+		super(nome, preco, jogabilidade);
+	}
+
+}

@@ -1,0 +1,59 @@
+import java.util.HashSet;
+
+abstract class Jogo {
+	private String nome;
+	private double preco;
+	private int maxScore;
+	private int jogadas;
+	private int zeradas;
+	HashSet<Jogabilidade> jogabilidade = new HashSet<Jogabilidade>();
+	
+	public Jogo(String nome,double preco, Jogabilidade jogabilidade){
+		this.nome = nome;
+		this.preco = preco;
+		this.maxScore = 0;
+		this.jogadas = 0;
+		this.zeradas = 0;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public int getMaxScore() {
+		return maxScore;
+	}
+
+	public void setMaxScore(int maxScore) {
+		this.maxScore = maxScore;
+	}
+
+	public int getJogadas() {
+		return jogadas;
+	}
+
+	public void setJogadas(int jogadas) {
+		this.jogadas = jogadas;
+	}
+
+	public int getZeradas() {
+		return zeradas;
+	}
+
+	public void setZeradas() {
+		this.zeradas += 1;
+	}	
+	
+}

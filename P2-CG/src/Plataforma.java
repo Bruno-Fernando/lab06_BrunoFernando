@@ -7,6 +7,7 @@ public class Plataforma extends Jogo{
 	}
 	
 	public int registraJogada(int score, boolean zerou){
+		setJogadas();
 		if(zerou){
 			setZeradas();
 			return x2p;

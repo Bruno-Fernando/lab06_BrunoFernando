@@ -1,0 +1,8 @@
+
+public class Luta extends Jogo{
+	
+	public Luta(String nome, double preco, Jogabilidade jogabilidade){
+		super(nome, preco, jogabilidade);
+	}
+
+}

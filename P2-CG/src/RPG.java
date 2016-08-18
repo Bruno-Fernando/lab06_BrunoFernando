@@ -7,6 +7,7 @@ public class RPG extends Jogo{
 	}
 	
 	public int registraJogada(int score, boolean zerou){
+		setJogadas();
 		if(score > getMaxScore()){
 			setMaxScore(score);
 		}
