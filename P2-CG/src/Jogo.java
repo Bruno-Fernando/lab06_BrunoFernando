@@ -1,6 +1,17 @@
 import java.util.HashSet;
 
-abstract class Jogo {
+/**
+ * 
+ * @author brunofs
+ * @param nome
+ * 	o nome do jogo
+ * @param preco
+ * 	o preco do jogo
+ * @param jogabilidade
+ * 	a jogabilidade do jogo
+ *
+ */
+public abstract class Jogo {
 	private String nome;
 	private double preco;
 	private int maxScore;
@@ -8,13 +19,13 @@ abstract class Jogo {
 	private int zeradas;
 	private HashSet<Jogabilidade> jogabilidade;
 	
-	public Jogo(String nome,double preco, Jogabilidade jogabilidade){
+	public Jogo(String nome,double preco, HashSet <Jogabilidade> jogabilidade){
 		this.nome = nome;
 		this.preco = preco;
 		this.maxScore = 0;
 		this.jogadas = 0;
 		this.zeradas = 0;
-		new HashSet<Jogabilidade>();
+		this.jogabilidade = jogabilidade;
 	}
 
 	abstract int registraJogada(int score, boolean zerou);

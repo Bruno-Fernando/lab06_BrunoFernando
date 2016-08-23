@@ -1,0 +1,110 @@
+
+
+import java.util.HashSet;
+
+public class Fachada {
+	private HashSet <Usuario> players = new HashSet <Usuario>();
+	
+	public void novoUsuario(String nome, String login){
+		if(pesquisaUsuario(login)){
+			//lanca exception
+		}
+		Usuario novo = new UsuarioNoob(nome, login);
+		players.add(novo);
+	}
+	
+	public boolean pesquisaUsuario(String login){
+		for (Usuario usuario : players) {
+			if(usuario.getLogin().equalsIgnoreCase(login)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Usuario retornaUsuario(String login){
+		for (Usuario usuario : players) {
+			if(usuario.getLogin().equalsIgnoreCase(login)){
+				return usuario;
+			}
+		}
+		return null;
+	}
+	
+	public void adicionaDinheiro(String login, double dinheiro){
+		if(pesquisaUsuario(login)){
+			retornaUsuario(login).adicionaGold(dinheiro);
+		}
+	}
+	
+	public void vendeJogo(String login, Jogo jogo){
+		Usuario usuario = retornaUsuario(login);
+		
+		usuario.compraJogo(usuario, jogo);
+		
+	}
+	
+	public void imprimeUsuarios(){
+		System.out.println("=== Central P2-CG ===");
+		
+		for (Usuario usuario : players) {
+			System.out.println(usuario.getLogin());
+			System.out.println(usuario);
+			
+			
+			//System.out.printf("Total de preço dos jogos: R$ ",);
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((players == null) ? 0 : players.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fachada other = (Fachada) obj;
+		if (players == null) {
+			if (other.players != null)
+				return false;
+		} else if (!players.equals(other.players))
+			return false;
+		return true;
+	}
+	
+	
+}

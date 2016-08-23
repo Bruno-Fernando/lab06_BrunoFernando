@@ -1,0 +1,17 @@
+
+public class UsuarioVeterano extends Usuario{
+	//private final double desconto = 0.2;
+	
+	public UsuarioVeterano(String nome, String login){
+		super(nome, login, 1000);
+		desconto = 0.2;
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return getNome() + " - Usuario Veterano";
+	}
+
+}

@@ -1,0 +1,16 @@
+
+public class UsuarioNoob extends Usuario{
+	//private final double desconto = 0.1;
+	
+	public UsuarioNoob(String nome, String login){
+		super(nome, login, 0);
+		desconto = 0.1;
+	}
+
+	@Override
+	public String toString() {
+		return getNome() + " - Usuario Noob";
+	}
+	
+	
+}

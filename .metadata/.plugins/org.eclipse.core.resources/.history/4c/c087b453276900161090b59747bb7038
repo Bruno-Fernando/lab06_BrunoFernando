@@ -1,0 +1,16 @@
+
+public class UsuarioVeterano extends Usuario{
+	private final double desconto = 0.2;
+	
+	public UsuarioVeterano(String nome, String login){
+		super(nome, login, 1000);
+	}
+	
+	public void compraJogo(Usuario usuario, Jogo jogo){
+		if(usuario.getGold()>=jogo.getPreco()){
+			usuario.setGold(usuario.getGold() - (jogo.getPreco() * desconto ));
+			bibliotecaJogos.add(jogo);
+		}
+	}
+
+}

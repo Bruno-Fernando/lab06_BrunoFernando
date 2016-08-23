@@ -1,0 +1,30 @@
+
+public class UsuarioNoob extends Usuario{
+	private final double desconto = 0.1;
+	
+	public UsuarioNoob(String nome, String login){
+		super(nome, login, 0);
+	}
+	
+	public void compraJogo(Usuario usuario, Jogo jogo){
+		if(usuario.getGold()>=jogo.getPreco()){
+			usuario.setGold(usuario.getGold() - (jogo.getPreco() * desconto ));
+			bibliotecaJogos.add(jogo);
+		}
+	}
+	
+	public double valorJogos(){
+		double total = 0.0;
+		for (Jogo jogo : bibliotecaJogos) {
+			total += jogo.getPreco();		
+		}
+		return total;
+	}
+
+	@Override
+	public String toString() {
+		return getNome() + " - Usuario Noob";
+	}
+	
+	
+}
