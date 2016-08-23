@@ -5,17 +5,17 @@ import java.util.HashSet;
 public class Fachada {
 	private HashSet <Usuario> players = new HashSet <Usuario>();
 	
-	public void novoUsuario(String nome, String login){
+	public void novoUsuario(String nome, String login) throws Exception{
 		if(retornaUsuario(login) == null){
-			//lanca exception
+			Usuario novo = new UsuarioNoob(nome, login);
+			players.add(novo);
 		}
-		Usuario novo = new UsuarioNoob(nome, login);
-		players.add(novo);
+		throw new Exception ("Usuario jah existe.");
 	}
 	
 	public Usuario retornaUsuario(String login){
 		for (Usuario usuario : players) {
-			if(usuario.getLogin().equalsIgnoreCase(login)){
+			if(usuario.getLogin().equals(login)){
 				return usuario;
 			}
 		}
@@ -28,56 +28,52 @@ public class Fachada {
 		}
 	}
 	
-	public void vendeJogo(String login, Jogo jogo){
+	public void vendeJogo(String login, String nome, double preco, HashSet<Jogabilidade> jogabilidade, TipoJogo tipo){
 		Usuario usuario = retornaUsuario(login);
-		
-		usuario.compraJogo(jogo);
+		try{
+			GameFactory factory = new GameFactory ();
+			Jogo jogo = factory.getJogo(nome, preco, jogabilidade, tipo);
+			usuario.compraJogo(jogo);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		
 	}
 	
-	public void imprimeUsuarios(){
-		System.out.println("=== Central P2-CG ===");
-		
-		for (Usuario usuario : players) {
-			System.out.println(usuario.getLogin());
-			System.out.println(usuario);
-			
-			
-			//System.out.printf("Total de preço dos jogos: R$ ",);
-			System.out.println("--------------------------------------------");
-		}
-	}
-	
-	public boolean upgrade(String login){
-		for (Usuario usuario : players) {
-			if(usuario.getLogin().equalsIgnoreCase(login)){
-				if(usuario instanceof UsuarioVeterano){
-					return false;
+	public boolean upgrade(String login) throws Exception{
+		try{
+			for (Usuario usuario : players) {
+				if(usuario.getLogin().equals(login)){
+					if(usuario instanceof UsuarioVeterano){
+						throw new Exception ("Usuario jah eh veterano.");
+					}
+					if(usuario.getX2p() >= 1000){
+						Usuario novoveterano = new UsuarioVeterano(usuario.getNome(),usuario.getLogin());
+						novoveterano.setGold(usuario.getGold());
+						novoveterano.setX2p(usuario.getX2p());
+						novoveterano.setBiblioteca(usuario.getBiblioteca());
+						players.add(novoveterano);
+						players.remove(usuario);
+						return true;
+					}
 				}
-				if(usuario.getX2p() >= 1000){
-					Usuario novoveterano = new UsuarioVeterano(usuario.getNome(),usuario.getLogin());
-					novoveterano.setGold(usuario.getGold());
-					novoveterano.setX2p(usuario.getX2p());
-					novoveterano.setBiblioteca(usuario.getBiblioteca());
-					players.add(novoveterano);
-					players.remove(usuario);
-					return true;
-				}
-			}
-			return false;
-		}
-		return false;
+			
+			}throw new Exception ("Usuario nao encontrado.");
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}return false;
 	}
 	
 	
 	
 	@Override
 	public String toString() {
-		String string = new String();
+		String string = "";
 		for (Usuario usuario : players) {
 			string += usuario.getLogin();
 			string += "\n";
 			string += usuario.toString();
+			
 		}
 		
 		return "=== Central P2-CG ===\n";

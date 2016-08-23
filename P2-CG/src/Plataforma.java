@@ -3,7 +3,7 @@ import java.util.HashSet;
 public class Plataforma extends Jogo{
 	private final int x2p = 20;
 	
-	public Plataforma(String nome, double preco, HashSet<Jogabilidade> jogabilidade){
+	public Plataforma(String nome, double preco, HashSet<Jogabilidade> jogabilidade)throws Exception{
 		super(nome, preco, jogabilidade);
 	}
 	

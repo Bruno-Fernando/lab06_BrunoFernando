@@ -1,7 +1,7 @@
 
 public class UsuarioVeterano extends Usuario{
 	
-	public UsuarioVeterano(String nome, String login){
+	public UsuarioVeterano(String nome, String login)throws Exception{
 		super(nome, login, 1000);
 		desconto = 0.2;
 	}

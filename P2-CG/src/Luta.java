@@ -2,7 +2,7 @@ import java.util.HashSet;
 
 public class Luta extends Jogo{
 	
-	public Luta(String nome, double preco, HashSet<Jogabilidade> jogabilidade){
+	public Luta(String nome, double preco, HashSet<Jogabilidade> jogabilidade) throws Exception{
 		super(nome, preco, jogabilidade);
 	}
 

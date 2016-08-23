@@ -19,7 +19,13 @@ public abstract class Jogo {
 	private int zeradas;
 	private HashSet<Jogabilidade> jogabilidade;
 	
-	public Jogo(String nome,double preco, HashSet <Jogabilidade> jogabilidade){
+	public Jogo(String nome,double preco, HashSet <Jogabilidade> jogabilidade) throws Exception{
+		if(nome == null){
+			throw new Exception ("Nome nao pode ser null.");
+		}
+		if(preco < 0){
+			throw new Exception ("Preco nao pode ser menor que zero");
+		}
 		this.nome = nome;
 		this.preco = preco;
 		this.maxScore = 0;

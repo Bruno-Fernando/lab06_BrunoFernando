@@ -8,7 +8,10 @@ abstract class Usuario {
 	private int x2p;
 	protected double desconto; 
 	
-	public Usuario (String nome, String login, int x2p){
+	public Usuario (String nome, String login, int x2p) throws Exception{
+		if(nome == null){
+			throw new Exception("Nome nao pode ser null.");
+		}
 		this.nome = nome;
 		this.login = login;
 		this.x2p = x2p;
@@ -26,11 +29,13 @@ abstract class Usuario {
 		}
 	}
 	
-	public void compraJogo(Jogo jogo){
+	public boolean compraJogo(Jogo jogo){
 		if(getGold()>=jogo.getPreco()){
 			setGold(getGold() - (jogo.getPreco() * desconto ));
 			bibliotecaJogos.add(jogo);
+			return true;
 		}
+		return false;
 	}
 
 	public String getNome() {
