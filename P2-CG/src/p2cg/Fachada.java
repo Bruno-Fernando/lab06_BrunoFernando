@@ -1,10 +1,20 @@
-
+package p2cg;
 
 import java.util.HashSet;
 
 public class Fachada {
 	private HashSet <Usuario> players = new HashSet <Usuario>();
 	
+	/**
+	 * Caso o usuario nao exista, ele eh registrado nos players 
+	 * 
+	 * @param nome
+	 * 			nome do usuario
+	 * @param login
+	 * 			login do usuario
+	 * @throws Exception
+	 * 				no caso do usuario existir
+	 */
 	public void novoUsuario(String nome, String login) throws Exception{
 		if(retornaUsuario(login) == null){
 			Usuario novo = new UsuarioNoob(nome, login);
@@ -13,6 +23,11 @@ public class Fachada {
 		throw new Exception ("Usuario jah existe.");
 	}
 	
+	/**
+	 * Procura por um usuario entre os players
+	 * @param login
+	 * @return um usuario, mas se o usuario na existir o retorno eh null
+	 */
 	public Usuario retornaUsuario(String login){
 		for (Usuario usuario : players) {
 			if(usuario.getLogin().equals(login)){
@@ -22,12 +37,27 @@ public class Fachada {
 		return null;
 	}
 	
+	/**
+	 * Atravez do login, eh pesquisado se o usuario existe e se existir 
+	 * o dinheiro eh adicionado a seu "perfil"
+	 * @param login
+	 * @param dinheiro
+	 */
 	public void adicionaDinheiro(String login, double dinheiro){
 		if(retornaUsuario(login) instanceof Usuario){
 			retornaUsuario(login).adicionaGold(dinheiro);
 		}
 	}
 	
+	/**
+	 * Tenta vender um jogo e se nao conseguir recebe uma excessao
+	 * que eh tratada no metodo
+	 * @param login
+	 * @param nome
+	 * @param preco
+	 * @param jogabilidade
+	 * @param tipo
+	 */
 	public void vendeJogo(String login, String nome, double preco, HashSet<Jogabilidade> jogabilidade, TipoJogo tipo){
 		Usuario usuario = retornaUsuario(login);
 		try{
@@ -39,7 +69,14 @@ public class Fachada {
 		}
 		
 	}
-	
+	/**
+	 * Faz o upgrade do usuario se ele possuir 1000 xp e se for  noob
+	 * @param login
+	 * @return true se conseguir fazer o upgrade e false caso contrario
+	 * @throws Exception
+	 * 				lanca e trata a exception no caso do usuario ja ser veterano ou 
+	 *				 o usuario nao existir
+	 */
 	public boolean upgrade(String login) throws Exception{
 		try{
 			for (Usuario usuario : players) {
@@ -76,19 +113,9 @@ public class Fachada {
 			
 		}
 		
-		return "=== Central P2-CG ===\n";
+		return "=== Central P2-CG ===\n" + string;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

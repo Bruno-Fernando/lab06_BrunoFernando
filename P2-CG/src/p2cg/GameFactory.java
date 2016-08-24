@@ -1,3 +1,5 @@
+package p2cg;
+
 import java.util.HashSet;
 
 public class GameFactory {
@@ -14,7 +16,23 @@ public class GameFactory {
 		return plataforma;
 	}
 	
+	/**
+	 * Chama os construtores de jogos do tipo RPG, Luta ou Plataforma
+	 * 
+	 * @param nome
+	 * 			nome do jogo
+	 * @param preco
+	 * 			preco do jogo
+	 * @param jogabilidade
+	 * 			jogabilidade(s) que ele possui
+	 * @param tipo
+	 * 			tipo que pode ser RPG, Luta ou Plataforma
+	 * @return um jogo que pode ser RPG, Luta ou Plataforma
+	 * @throws Exception
+	 * 			exceptions lancado na classe Jogo
+	 */
 	public Jogo getJogo(String nome, double preco, HashSet<Jogabilidade> jogabilidade, TipoJogo tipo) throws Exception{
+		
 		if(tipo.equals(TipoJogo.RPG)){
 			return RPG(nome, preco, jogabilidade);
 		}

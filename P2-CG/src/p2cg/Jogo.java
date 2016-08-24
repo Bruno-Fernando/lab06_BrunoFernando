@@ -1,16 +1,7 @@
+package p2cg;
+
 import java.util.HashSet;
 
-/**
- * 
- * @author brunofs
- * @param nome
- * 	o nome do jogo
- * @param preco
- * 	o preco do jogo
- * @param jogabilidade
- * 	a jogabilidade do jogo
- *
- */
 public abstract class Jogo {
 	private String nome;
 	private double preco;
@@ -19,9 +10,26 @@ public abstract class Jogo {
 	private int zeradas;
 	private HashSet<Jogabilidade> jogabilidade;
 	
+	/**
+	 * 
+	 * @param nome
+	 * 				o nome do jogo
+	 * @param preco
+	 * 				o valor do jogo 
+	 * @param jogabilidade
+	 * 				qual/quais jogabilidades o jogo possui
+	 * @param maxScore
+	 * 				quantidade maxima de score obtidas neste jogo, iniciando com 0
+	 * @param jogadas
+	 * 				numero de vezes que foi jogado
+	 * @param zeradas
+	 * 				quantidade de vezes que o jogo foi terminado
+	 * @throws Exception
+	 * 				excessoes de nome null e preco negativo
+	 */
 	public Jogo(String nome,double preco, HashSet <Jogabilidade> jogabilidade) throws Exception{
-		if(nome == null){
-			throw new Exception ("Nome nao pode ser null.");
+		if(nome == null || nome.equals("")){
+			throw new Exception ("Nome nao pode ser null ou  vazio.");
 		}
 		if(preco < 0){
 			throw new Exception ("Preco nao pode ser menor que zero");

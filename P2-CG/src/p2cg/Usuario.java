@@ -1,3 +1,5 @@
+package p2cg;
+
 import java.util.HashSet;
 
 abstract class Usuario {
@@ -7,10 +9,25 @@ abstract class Usuario {
 	private double gold = 0;
 	private int x2p;
 	protected double desconto; 
+	protected int x2pcompra;
 	
+	/**
+	 * 
+	 * @param nome
+	 * 				o nome do usuario
+	 * @param login
+	 * 				o login do usuario
+	 * @param x2p
+	 * 				a x2p  inicial do usuario que depende de seu tipo(noob ou veterano)
+	 * @throws Exception
+	 * 				excessao de nome null
+	 */
 	public Usuario (String nome, String login, int x2p) throws Exception{
-		if(nome == null){
-			throw new Exception("Nome nao pode ser null.");
+		if(nome == null || nome.equals("")){
+			throw new Exception("Nome nao pode ser null ou vazio.");
+		}
+		if(login == null || login.equals("")){
+			throw new Exception("Login nao pode ser null ou vazio.");
 		}
 		this.nome = nome;
 		this.login = login;
@@ -21,18 +38,41 @@ abstract class Usuario {
 		this.gold += gold;
 	}
 	
-	public void registraJogada(String nomeDoJogo, int score,boolean zerou){
+	/**
+	 * Faz uma busca na biblioteca de jogos do usuario e caso encontre o jogo
+	 * o metodo seta a x2p ganha a partir da chamada do metodo registraJogada
+	 * 
+	 * @param nomeDoJogo
+	 * @param score
+	 * @param zerou
+	 */
+	public boolean registraJogada(String nomeDoJogo, int score,boolean zerou){
 		for (Jogo jogo : bibliotecaJogos) {
 			if(nomeDoJogo.equalsIgnoreCase(jogo.getNome())){
 				setX2p(jogo.registraJogada(score, zerou));
+				return true;
 			}
-		}
+		}return false;
 	}
 	
+	/**
+	 * Checa se o usuario possui dinheiro suficiente para comprar o jogo
+	 * e se ele tiver, entao o jogo eh adicionado em sua biblioteca de jogos 
+	 * e o preco do jogo eh descontado do dinheiro que o usuario possui alem 
+	 * de ser acrescentado a x2p por compra.
+	 * 
+	 * @param jogo
+	 * 			jogo que pretende-se comprar
+	 * @return
+	 * 			um boolean que retorna true se o jogo foi comprado e false caso contrario
+	 */
 	public boolean compraJogo(Jogo jogo){
-		if(getGold()>=jogo.getPreco()){
-			setGold(getGold() - (jogo.getPreco() * desconto ));
+		if(getGold()>= jogo.getPreco()){
+			setGold(getGold() - (jogo.getPreco() - (jogo.getPreco() * desconto )));
 			bibliotecaJogos.add(jogo);
+			double pontos = x2pcompra * jogo.getPreco();
+			int pontosx2p = (int) pontos;
+			setX2p(pontosx2p);
 			return true;
 		}
 		return false;
@@ -67,15 +107,7 @@ abstract class Usuario {
 	}
 
 	public void setX2p(int x2p) {
-		this.x2p = x2p;
-	}
-	
-	public double valorJogos(){
-		double total = 0.0;
-		for (Jogo jogo : bibliotecaJogos) {
-			total += jogo.getPreco();		
-		}
-		return total;
+		this.x2p += x2p;
 	}
 	
 	public HashSet<Jogo> getBiblioteca(){
